@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
@@ -21,6 +22,10 @@ public class UsersAdapter extends RecyclerView.Adapter <UsersAdapter.UserItemVie
     private List<User> mUsers;
 
     public UsersAdapter(List<User> users) {
+        mUsers = users != null? users: new ArrayList<User>();
+    }
+
+    public void setUsers(List<User> users) {
         mUsers = users;
     }
 

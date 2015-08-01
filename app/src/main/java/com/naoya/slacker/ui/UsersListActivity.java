@@ -1,18 +1,38 @@
 package com.naoya.slacker.ui;
 
 import com.naoya.slacker.R;
+import com.naoya.slacker.data.remote.RemoteDataFetcher;
+import com.naoya.slacker.model.User;
+import com.naoya.slacker.model.UserList;
 
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import java.util.List;
+
+import javax.inject.Inject;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import rx.Subscriber;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
+import rx.schedulers.Schedulers;
 
-public class UsersListActivity extends AppCompatActivity {
+public class UsersListActivity extends BaseActivity {
     @Bind(R.id.recyclerView)
     RecyclerView mRecyclerView;
+
+    Subscription mSubscription;
+
+    @Inject
+    RemoteDataFetcher mRemoteDataFetcher;
+
+    private UsersAdapter mUsersAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +41,24 @@ public class UsersListActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        //mRecyclerView.setAdapter(new UsersAdapter());
+        mUsersAdapter = new UsersAdapter(null);
+        mRecyclerView.setAdapter(mUsersAdapter);
+
+        mSubscription = mRemoteDataFetcher.getUsers()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.from(AsyncTask.THREAD_POOL_EXECUTOR))
+                .subscribe(new Action1<UserList>() {
+                    @Override
+                    public void call(UserList userList) {
+                        mUsersAdapter.setUsers(userList.getMembers());
+                        mUsersAdapter.notifyDataSetChanged();
+                    }
+                });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mSubscription.unsubscribe();
     }
 }

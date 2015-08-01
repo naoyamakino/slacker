@@ -4,7 +4,7 @@ package com.naoya.slacker.model;
  * Created by Naoya on 15-08-01.
  */
 public class User {
-    private Long id;
+    private String id;
     private String name;
     private Boolean deleted;
     private String color;

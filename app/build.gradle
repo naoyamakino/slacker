@@ -17,6 +17,14 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    packagingOptions {
+        exclude 'LICENSE.txt'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/services/javax.annotation.processing.Processor'
+    }
 }
 
 dependencies {
@@ -30,4 +38,5 @@ dependencies {
     compile 'com.squareup.dagger:dagger:1.2.2'
     compile 'com.android.support:recyclerview-v7:22.2.1'
     compile 'com.jakewharton:butterknife:7.0.1'
+    compile 'io.reactivex:rxandroid:0.25.0'
 }
