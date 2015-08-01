@@ -22,6 +22,5 @@ public class UsersListActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         //mRecyclerView.setAdapter(new UsersAdapter());
-
     }
 }
