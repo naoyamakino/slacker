@@ -9,9 +9,9 @@ public class Profile {
     private String email;
     private String skype;
     private String phone;
-    private String image24;
-    private String image32;
-    private String image48;
-    private String image72;
-    private String image192;
+    private String image_24;
+    private String image_32;
+    private String image_48;
+    private String image_72;
+    private String image_192;
 }
