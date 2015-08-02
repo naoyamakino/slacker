@@ -1,23 +1,18 @@
 package com.naoya.slacker.ui;
 
 import com.naoya.slacker.R;
-import com.naoya.slacker.data.remote.RemoteDataFetcher;
-import com.naoya.slacker.model.User;
+import com.naoya.slacker.data.remote.RemoteDataSource;
 import com.naoya.slacker.model.UserList;
 
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-
-import java.util.List;
 
 import javax.inject.Inject;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import rx.Subscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
@@ -30,7 +25,7 @@ public class UsersListActivity extends BaseActivity {
     Subscription mSubscription;
 
     @Inject
-    RemoteDataFetcher mRemoteDataFetcher;
+    RemoteDataSource mRemoteDataSource;
 
     private UsersAdapter mUsersAdapter;
 
@@ -44,7 +39,7 @@ public class UsersListActivity extends BaseActivity {
         mUsersAdapter = new UsersAdapter(null);
         mRecyclerView.setAdapter(mUsersAdapter);
 
-        mSubscription = mRemoteDataFetcher.getUsers()
+        mSubscription = mRemoteDataSource.getUsers()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.from(AsyncTask.THREAD_POOL_EXECUTOR))
                 .subscribe(new Action1<UserList>() {

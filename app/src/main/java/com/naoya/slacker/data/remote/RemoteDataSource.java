@@ -8,10 +8,10 @@ import rx.Observable;
 /**
  * Created by Naoya on 15-08-01.
  */
-public class RemoteDataFetcher implements DataFetcher{
+public class RemoteDataSource implements DataFetcher{
     private SlackRestAdapter mRestAdapter;
 
-    public RemoteDataFetcher(SlackRestAdapter restAdapter) {
+    public RemoteDataSource(SlackRestAdapter restAdapter) {
         mRestAdapter = restAdapter;
     }
 

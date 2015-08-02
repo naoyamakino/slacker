@@ -32,6 +32,7 @@ public class UsersAdapter extends RecyclerView.Adapter <UsersAdapter.UserItemVie
     @Override
     public void onBindViewHolder(UserItemViewHolder holder, int position) {
         User user = mUsers.get(position);
+        //TODO: handle poor names with 1 letter
         if (user.getName() != null && user.getName().length() >= 2) {
             String initial = user.getName().substring(0, 1).toUpperCase();
             String upperString = initial + user.getName().substring(1);

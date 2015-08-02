@@ -4,7 +4,7 @@ import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import com.naoya.slacker.data.remote.RemoteDataFetcher;
+import com.naoya.slacker.data.remote.RemoteDataSource;
 import com.naoya.slacker.data.remote.SlackRestAdapter;
 import com.naoya.slacker.ui.UsersListActivity;
 
@@ -53,8 +53,8 @@ public class DataModules {
 
     @Singleton
     @Provides
-    RemoteDataFetcher provideRemoteDataFetcher(SlackRestAdapter slackRestAdapter) {
-        return new RemoteDataFetcher(slackRestAdapter);
+    RemoteDataSource provideRemoteDataSource(SlackRestAdapter slackRestAdapter) {
+        return new RemoteDataSource(slackRestAdapter);
     }
 
 }
