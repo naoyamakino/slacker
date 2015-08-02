@@ -3,6 +3,7 @@ package com.naoya.slacker.data.memory;
 import com.naoya.slacker.data.DataFetcher;
 import com.naoya.slacker.data.DataRetainer;
 import com.naoya.slacker.model.UserList;
+import com.naoya.slacker.util.Logger;
 
 import rx.Observable;
 
@@ -15,7 +16,7 @@ public class MemoryDataSource implements DataFetcher, DataRetainer{
 
     @Override
     public Observable<UserList> getUsers() {
-        return Observable.just(mUserList);
+        return Observable.just(mUserList).compose(Logger.logSource("MEMORY"));
     }
 
     @Override
