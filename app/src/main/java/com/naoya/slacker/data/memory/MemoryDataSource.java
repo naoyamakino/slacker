@@ -11,6 +11,7 @@ import rx.Observable;
  */
 public class MemoryDataSource implements DataFetcher, DataRetainer{
     private UserList mUserList;
+    private boolean mIsCached;
 
     @Override
     public Observable<UserList> getUsers() {
@@ -20,5 +21,11 @@ public class MemoryDataSource implements DataFetcher, DataRetainer{
     @Override
     public void setUser(UserList userList) {
         mUserList = userList;
+        if (mUserList != null) mIsCached = true;
+    }
+
+    @Override
+    public boolean isCached() {
+        return mIsCached;
     }
 }

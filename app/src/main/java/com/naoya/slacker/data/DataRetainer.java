@@ -8,4 +8,6 @@ import com.naoya.slacker.model.UserList;
 public interface DataRetainer {
 
     void setUser(UserList userList);
+
+    boolean isCached();
 }
