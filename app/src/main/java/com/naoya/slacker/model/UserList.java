@@ -12,4 +12,8 @@ public class UserList {
     public List<User> getMembers() {
         return members;
     }
+
+    public void setMembers(List<User> members) {
+        this.members = members;
+    }
 }
