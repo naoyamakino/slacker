@@ -4,10 +4,12 @@ import com.naoya.slacker.data.disk.ProfileData;
 
 import android.content.ContentValues;
 
+import java.io.Serializable;
+
 /**
  * Created by Naoya on 15-08-01.
  */
-public class Profile {
+public class Profile implements Serializable{
     private String firstName;
     private String lastName;
     private String realName;

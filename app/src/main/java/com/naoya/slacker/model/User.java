@@ -7,10 +7,12 @@ import com.naoya.slacker.data.disk.UserData;
 import android.content.ContentValues;
 import android.database.Cursor;
 
+import java.io.Serializable;
+
 /**
  * Created by Naoya on 15-08-01.
  */
-public class User {
+public class User implements Serializable{
     private String id;
     private String name;
     private Boolean deleted;
@@ -35,6 +37,10 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getColor() {
+        return color;
     }
 
     public String getId() {

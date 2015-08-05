@@ -5,6 +5,8 @@ import com.naoya.slacker.SlackerApplication;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import butterknife.ButterKnife;
+
 /**
  * Created by Naoya on 15-08-01.
  */
@@ -15,5 +17,6 @@ public class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         SlackerApplication application = (SlackerApplication) getApplicationContext();
         application.getObjectGraph().inject(this);
+
     }
 }
