@@ -3,6 +3,8 @@ package com.naoya.slacker.ui;
 import com.naoya.slacker.R;
 import com.naoya.slacker.model.User;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +22,12 @@ import butterknife.ButterKnife;
  */
 public class UsersAdapter extends RecyclerView.Adapter <UsersAdapter.UserItemViewHolder>{
     private List<User> mUsers;
+    private View.OnClickListener mListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+        }
+    };
 
     public UsersAdapter(List<User> users) {
         mUsers = users != null? users: new ArrayList<User>();
@@ -31,7 +39,7 @@ public class UsersAdapter extends RecyclerView.Adapter <UsersAdapter.UserItemVie
 
     @Override
     public void onBindViewHolder(UserItemViewHolder holder, int position) {
-        User user = mUsers.get(position);
+        final User user = mUsers.get(position);
         //TODO: handle poor names with 1 letter
         if (user.getName() != null && user.getName().length() >= 2) {
             String initial = user.getName().substring(0, 1).toUpperCase();
@@ -39,6 +47,14 @@ public class UsersAdapter extends RecyclerView.Adapter <UsersAdapter.UserItemVie
             holder.mInitialTextView.setText(initial);
             holder.mUserNameTextView.setText(upperString);
         }
+        holder.mUserNameTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Context context = v.getContext();
+                Intent intent = UserDetailActivity.getStartIntent(context, user);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override

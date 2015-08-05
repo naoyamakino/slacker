@@ -39,6 +39,7 @@ public class DiskDataSource implements DataFetcher, DataRetainer{
                             while (cursor.moveToNext()) {
                                 User user = new User();
                                 user.setName(Db.getString(cursor, UserData.UserColumns.NAME));
+                                //TODO: set rest of data
                                 users.add(user);
                             }
                             userList.setMembers(users);

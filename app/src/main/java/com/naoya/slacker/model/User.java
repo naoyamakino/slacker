@@ -26,9 +26,14 @@ public class User {
         this.name = name;
     }
 
+    public String getId() {
+        return id;
+    }
+
     public ContentValues getContentValues() {
         ContentValues contentValues = new ContentValues();
         contentValues.put(UserData.UserColumns.NAME, name);
+        //TODO: added rest of values in content values
         return contentValues;
     }
 }

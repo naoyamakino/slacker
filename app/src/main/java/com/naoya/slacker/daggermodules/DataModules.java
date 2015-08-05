@@ -10,6 +10,7 @@ import com.naoya.slacker.data.disk.SlackerDatabaseOpenHelper;
 import com.naoya.slacker.data.memory.MemoryDataSource;
 import com.naoya.slacker.data.remote.RemoteDataSource;
 import com.naoya.slacker.data.remote.SlackRestAdapter;
+import com.naoya.slacker.ui.UserDetailActivity;
 import com.naoya.slacker.ui.UsersListActivity;
 import com.squareup.sqlbrite.BriteDatabase;
 import com.squareup.sqlbrite.SqlBrite;
@@ -29,7 +30,7 @@ import retrofit.converter.GsonConverter;
 /**
  * Created by Naoya on 15-07-30.
  */
-@Module(library = true, injects = {UsersListActivity.class})
+@Module(library = true, injects = {UsersListActivity.class, UserDetailActivity.class})
 public class DataModules {
     private static final String SLACK_API_ENDPOINT = "https://slack.com/api";
     private static final String SLACK_API_TOKEN = "xoxp-5048173296-5048346304-5180362684-7b3865";
