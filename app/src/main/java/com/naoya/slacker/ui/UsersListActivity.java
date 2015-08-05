@@ -1,10 +1,14 @@
 package com.naoya.slacker.ui;
 
 import com.naoya.slacker.R;
+import com.naoya.slacker.data.disk.DiskDataSource;
 import com.naoya.slacker.data.memory.MemoryDataSource;
 import com.naoya.slacker.data.remote.RemoteDataSource;
 import com.naoya.slacker.model.UserList;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -34,6 +38,9 @@ public class UsersListActivity extends BaseActivity {
     @Inject
     MemoryDataSource mMemoryDataSource;
 
+    @Inject
+    DiskDataSource mDiskDataSource;
+
     private UsersAdapter mUsersAdapter;
 
     @Override
@@ -51,6 +58,8 @@ public class UsersListActivity extends BaseActivity {
                     public Observable<UserList> call() {
                         if (mMemoryDataSource.isCached()) {
                             return mMemoryDataSource.getUsers();
+                        } else if (!isNetworkAvailable()) {
+                            return mDiskDataSource.getUsers();
                         } else {
                             return mRemoteDataSource.getUsers();
                         }
@@ -71,5 +80,12 @@ public class UsersListActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         mSubscription.unsubscribe();
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 }
