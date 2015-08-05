@@ -4,10 +4,17 @@ import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import com.naoya.slacker.SlackerApplication;
+import com.naoya.slacker.data.disk.SlackerDatabaseOpenHelper;
 import com.naoya.slacker.data.memory.MemoryDataSource;
 import com.naoya.slacker.data.remote.RemoteDataSource;
 import com.naoya.slacker.data.remote.SlackRestAdapter;
 import com.naoya.slacker.ui.UsersListActivity;
+import com.squareup.sqlbrite.BriteDatabase;
+import com.squareup.sqlbrite.SqlBrite;
+
+import android.content.Context;
+import android.database.sqlite.SQLiteOpenHelper;
 
 import javax.inject.Singleton;
 
@@ -25,6 +32,15 @@ import retrofit.converter.GsonConverter;
 public class DataModules {
     private static final String SLACK_API_ENDPOINT = "https://slack.com/api";
     private static final String SLACK_API_TOKEN = "xoxp-5048173296-5048346304-5180362684-7b3865";
+    private Context mContext;
+
+    public DataModules(SlackerApplication application) {
+        mContext = application;
+    }
+
+    @Provides Context provideContext() {
+        return mContext;
+    }
 
     @Singleton
     @Provides
@@ -64,6 +80,21 @@ public class DataModules {
     @Provides
     MemoryDataSource provideMemoryDataSource() {
         return new MemoryDataSource();
+    }
+
+    @Provides @Singleton
+    SQLiteOpenHelper providesOpenHelper(Context context) {
+        return new SlackerDatabaseOpenHelper(context);
+    }
+
+    @Provides @Singleton
+    SqlBrite provideSqlBrite() {
+        return SqlBrite.create();
+    }
+
+    @Provides @Singleton
+    BriteDatabase provideBriteDatabase(SqlBrite sqlBrite, SQLiteOpenHelper sqLiteOpenHelper) {
+        return sqlBrite.wrapDatabaseHelper(sqLiteOpenHelper);
     }
 
 }

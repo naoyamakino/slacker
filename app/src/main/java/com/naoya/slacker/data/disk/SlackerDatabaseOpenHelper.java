@@ -10,9 +10,10 @@ import android.database.sqlite.SQLiteOpenHelper;
  * Created by Naoya on 15-08-04.
  */
 public class SlackerDatabaseOpenHelper extends SQLiteOpenHelper {
+    private static final int VERSION = 1;
 
-    public SlackerDatabaseOpenHelper(Context context, String name, SQLiteDatabase.CursorFactory cursorFactory, int version) {
-        super(context, name, cursorFactory, version);
+    public SlackerDatabaseOpenHelper(Context context) {
+        super(context, "slacker.db", null, VERSION);
     }
 
     @Override

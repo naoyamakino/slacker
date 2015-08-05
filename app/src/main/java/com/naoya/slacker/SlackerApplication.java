@@ -13,7 +13,7 @@ public class SlackerApplication extends Application {
 
     public final ObjectGraph getObjectGraph() {
         if (mObjectGraph == null) {
-            mObjectGraph = ObjectGraph.create(new DataModules());
+            mObjectGraph = ObjectGraph.create(new DataModules(this));
         }
         return mObjectGraph;
     }
