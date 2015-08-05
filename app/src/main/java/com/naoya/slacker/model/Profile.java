@@ -14,4 +14,14 @@ public class Profile {
     private String image_48;
     private String image_72;
     private String image_192;
+
+    private String mUserId;
+
+    public String getUserId() {
+        return mUserId;
+    }
+
+    public void setUserId(String userId) {
+        mUserId = userId;
+    }
 }
