@@ -38,6 +38,14 @@ public class Profile implements Serializable{
         return phone;
     }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
     public ContentValues getContentValues(String userId) {
         ContentValues contentValues = new ContentValues();
         contentValues.put(ProfileData.ProfileColumns.USER_ID, userId);

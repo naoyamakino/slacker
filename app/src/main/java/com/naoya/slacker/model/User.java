@@ -61,5 +61,7 @@ public class User implements Serializable{
         color = (Db.getString(cursor, UserData.UserColumns.COLOR));
         profile = new Profile();
         profile.setRealName(Db.getString(cursor, ProfileData.ProfileColumns.REAL_NAME));
+        profile.setEmail(Db.getString(cursor, ProfileData.ProfileColumns.EMAIL));
+        profile.setPhone(Db.getString(cursor, ProfileData.ProfileColumns.PHONE));
     }
 }
