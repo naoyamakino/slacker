@@ -22,12 +22,6 @@ import butterknife.ButterKnife;
  */
 public class UsersAdapter extends RecyclerView.Adapter <UsersAdapter.UserItemViewHolder>{
     private List<User> mUsers;
-    private View.OnClickListener mListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-
-        }
-    };
 
     public UsersAdapter(List<User> users) {
         mUsers = users != null? users: new ArrayList<User>();
