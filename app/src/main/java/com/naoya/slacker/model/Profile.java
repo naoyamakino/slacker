@@ -1,11 +1,16 @@
 package com.naoya.slacker.model;
 
+import com.naoya.slacker.data.disk.ProfileData;
+
+import android.content.ContentValues;
+
 /**
  * Created by Naoya on 15-08-01.
  */
 public class Profile {
     private String firstName;
     private String lastName;
+    private String realName;
     private String email;
     private String skype;
     private String phone;
@@ -15,13 +20,22 @@ public class Profile {
     private String image_72;
     private String image_192;
 
-    private String mUserId;
-
-    public String getUserId() {
-        return mUserId;
+    public void setRealName(String realName) {
+        this.realName = realName;
     }
 
-    public void setUserId(String userId) {
-        mUserId = userId;
+    public String getRealName() {
+        return realName;
+    }
+
+    public ContentValues getContentValues(String userId) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(ProfileData.ProfileColumns.USER_ID, userId);
+        contentValues.put(ProfileData.ProfileColumns.REAL_NAME, realName);
+        contentValues.put(ProfileData.ProfileColumns.EMAIL, email);
+        contentValues.put(ProfileData.ProfileColumns.SKYPE, skype);
+        contentValues.put(ProfileData.ProfileColumns.PHONE, phone);
+        contentValues.put(ProfileData.ProfileColumns.IMAGE_24, image_24);
+        return contentValues;
     }
 }

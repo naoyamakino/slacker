@@ -35,6 +35,7 @@ public class SlackerDatabaseOpenHelper extends SQLiteOpenHelper {
                 + ProfileData.ProfileColumns.USER_ID + " TEXT,"
                 + ProfileData.ProfileColumns.FIRST_NAME + " TEXT,"
                 + ProfileData.ProfileColumns.LAST_NAME + " TEXT,"
+                + ProfileData.ProfileColumns.REAL_NAME + " TEXT,"
                 + ProfileData.ProfileColumns.EMAIL + " TEXT,"
                 + ProfileData.ProfileColumns.PHONE + " TEXT,"
                 + ProfileData.ProfileColumns.SKYPE + " TEXT,"

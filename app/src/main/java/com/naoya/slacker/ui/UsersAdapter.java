@@ -41,9 +41,10 @@ public class UsersAdapter extends RecyclerView.Adapter <UsersAdapter.UserItemVie
     public void onBindViewHolder(UserItemViewHolder holder, int position) {
         final User user = mUsers.get(position);
         //TODO: handle poor names with 1 letter
-        if (user.getName() != null && user.getName().length() >= 2) {
-            String initial = user.getName().substring(0, 1).toUpperCase();
-            String upperString = initial + user.getName().substring(1);
+        String name = user.getProfile().getRealName();
+        if (name != null && name.length() >= 2) {
+            String initial = name.substring(0, 1).toUpperCase();
+            String upperString = initial + name.substring(1);
             holder.mInitialTextView.setText(initial);
             holder.mUserNameTextView.setText(upperString);
         }

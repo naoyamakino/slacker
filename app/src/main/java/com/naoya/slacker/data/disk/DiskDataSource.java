@@ -28,7 +28,7 @@ public class DiskDataSource implements DataFetcher, DataRetainer{
 
     @Override
     public Observable<UserList> getUsers() {
-        return mDatabase.createQuery(UserData.TABLE, "select * from users", null)
+        return mDatabase.createQuery(UserData.TABLE, "select * from users left outer join profiles on users.id = profiles.userId", null)
                 .map(new Func1<SqlBrite.Query, UserList>() {
                     @Override
                     public UserList call(SqlBrite.Query query) {
@@ -37,10 +37,7 @@ public class DiskDataSource implements DataFetcher, DataRetainer{
                         List<User> users = new ArrayList<User>(cursor.getCount());
                         try {
                             while (cursor.moveToNext()) {
-                                User user = new User();
-                                user.setName(Db.getString(cursor, UserData.UserColumns.NAME));
-                                //TODO: set rest of data
-                                users.add(user);
+                                users.add(new User(cursor));
                             }
                             userList.setMembers(users);
                         } finally {
@@ -54,8 +51,14 @@ public class DiskDataSource implements DataFetcher, DataRetainer{
 
     @Override
     public void retainUserList(UserList userList) {
+        //TODO: add a delta sync mechanism
+        mDatabase.delete(UserData.TABLE, "");
+        mDatabase.delete(ProfileData.TABLE, "");
         for (User user: userList.getMembers()) {
             mDatabase.insert(UserData.TABLE, user.getContentValues());
+            if (user.getProfile() != null) {
+               mDatabase.insert(ProfileData.TABLE, user.getProfile().getContentValues(user.getId()));
+            }
         }
     }
 

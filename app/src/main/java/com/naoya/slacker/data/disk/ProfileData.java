@@ -12,6 +12,7 @@ public interface ProfileData {
         String USER_ID = "userId";
         String FIRST_NAME = "firstName";
         String LAST_NAME = "lastName";
+        String REAL_NAME = "realName";
         String EMAIL = "email";
         String PHONE = "phone";
         String SKYPE = "skype";
