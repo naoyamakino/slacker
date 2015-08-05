@@ -20,7 +20,7 @@ public class MemoryDataSource implements DataFetcher, DataRetainer{
     }
 
     @Override
-    public void setUser(UserList userList) {
+    public void retainUserList(UserList userList) {
         mUserList = userList;
         if (mUserList != null) mIsCached = true;
     }

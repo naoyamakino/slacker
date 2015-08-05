@@ -1,6 +1,7 @@
 package com.naoya.slacker.data.remote;
 
 import com.naoya.slacker.data.DataFetcher;
+import com.naoya.slacker.data.disk.DiskDataSource;
 import com.naoya.slacker.data.memory.MemoryDataSource;
 import com.naoya.slacker.model.UserList;
 import com.naoya.slacker.util.Logger;
@@ -14,10 +15,12 @@ import rx.functions.Action1;
 public class RemoteDataSource implements DataFetcher{
     private SlackRestAdapter mRestAdapter;
     private MemoryDataSource mMemoryDataSource;
+    private DiskDataSource mDiskDataSource;
 
-    public RemoteDataSource(SlackRestAdapter restAdapter, MemoryDataSource memoryDataSource) {
+    public RemoteDataSource(SlackRestAdapter restAdapter, MemoryDataSource memoryDataSource, DiskDataSource diskDataSource) {
         mRestAdapter = restAdapter;
         mMemoryDataSource = memoryDataSource;
+        mDiskDataSource = diskDataSource;
     }
 
     @Override
@@ -25,7 +28,8 @@ public class RemoteDataSource implements DataFetcher{
         return mRestAdapter.getUsers().doOnNext(new Action1<UserList>() {
             @Override
             public void call(UserList userList) {
-                mMemoryDataSource.setUser(userList);
+                mMemoryDataSource.retainUserList(userList);
+                mDiskDataSource.retainUserList(userList);
             }
         }).compose(Logger.logSource("NETWORK"));
     }

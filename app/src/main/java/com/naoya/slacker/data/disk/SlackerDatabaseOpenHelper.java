@@ -18,7 +18,7 @@ public class SlackerDatabaseOpenHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("(CREATE TABLE " + UserData.TABLE
+        db.execSQL("CREATE TABLE " + UserData.TABLE
                 + " (" + UserData.UserColumns._ID + " INTEGER PRIMARY KEY,"
                 + UserData.UserColumns.ID + " TEXT,"
                 + UserData.UserColumns.NAME + " TEXT,"
@@ -30,7 +30,7 @@ public class SlackerDatabaseOpenHelper extends SQLiteOpenHelper {
                 + UserData.UserColumns.HAS_FILES + " INTEGER"
                 + ")");
 
-        db.execSQL("(CREATE TABLE " + ProfileData.TABLE
+        db.execSQL("CREATE TABLE " + ProfileData.TABLE
                 + " (" + ProfileData.ProfileColumns._ID + " INTEGER PRIMARY KEY,"
                 + ProfileData.ProfileColumns.USER_ID + " TEXT,"
                 + ProfileData.ProfileColumns.FIRST_NAME + " TEXT,"

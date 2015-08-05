@@ -1,5 +1,9 @@
 package com.naoya.slacker.model;
 
+import com.naoya.slacker.data.disk.UserData;
+
+import android.content.ContentValues;
+
 /**
  * Created by Naoya on 15-08-01.
  */
@@ -20,5 +24,11 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public ContentValues getContentValues() {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(UserData.UserColumns.NAME, name);
+        return contentValues;
     }
 }

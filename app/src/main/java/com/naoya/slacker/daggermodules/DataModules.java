@@ -73,8 +73,9 @@ public class DataModules {
     @Provides
     RemoteDataSource provideRemoteDataSource(
             SlackRestAdapter slackRestAdapter,
-            MemoryDataSource memoryDataSource) {
-        return new RemoteDataSource(slackRestAdapter, memoryDataSource);
+            MemoryDataSource memoryDataSource,
+            DiskDataSource diskDataSource) {
+        return new RemoteDataSource(slackRestAdapter, memoryDataSource, diskDataSource);
     }
 
     @Singleton
