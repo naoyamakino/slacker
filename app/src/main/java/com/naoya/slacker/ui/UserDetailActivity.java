@@ -6,11 +6,16 @@ import com.naoya.slacker.model.Profile;
 import com.naoya.slacker.model.User;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
+import com.squareup.picasso.Transformation;
 
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.LinearGradient;
+import android.graphics.Paint;
+import android.graphics.Shader;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -35,10 +40,7 @@ public class UserDetailActivity extends BaseActivity {
         return intent;
     }
 
-    @Bind(R.id.toolBar)
-    Toolbar mToolbar;
-
-    @Bind(R.id.toolBarNameTextView)
+    @Bind(R.id.profileTextView)
     TextView mToolBarName;
 
     @Bind(R.id.emailTextView)
@@ -59,7 +61,11 @@ public class UserDetailActivity extends BaseActivity {
         @Override
         public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
             File file = mImageCache.saveImage(UserDetailActivity.this, bitmap, mUser);
-            Picasso.with(UserDetailActivity.this).load(file).fit().into(mProfileImage);
+            Picasso.with(UserDetailActivity.this)
+                    .load(file)
+                    .transform(new GradientTransformation())
+                    .fit()
+                    .into(mProfileImage);
         }
 
         @Override
@@ -84,7 +90,7 @@ public class UserDetailActivity extends BaseActivity {
             throw new IllegalStateException("user must be supplied to a UserDetailActivity");
         }
         if (mUser.getColor() != null) {
-            mToolbar.setBackgroundColor(Color.parseColor("#" + mUser.getColor()));
+            mProfileImage.setBackgroundColor(Color.parseColor("#" + mUser.getColor()));
         }
 
         Profile profile = mUser.getProfile();
@@ -100,7 +106,11 @@ public class UserDetailActivity extends BaseActivity {
 
             File profileImage = mImageCache.getFile(this, mUser);
             if (profileImage.exists()) {
-                Picasso.with(this).load(profileImage).fit().into(mProfileImage);
+                Picasso.with(this)
+                        .load(profileImage)
+                        .transform(new GradientTransformation())
+                        .fit()
+                        .into(mProfileImage);
             } else {
                 Picasso.with(this).load(profile.getImage_192()).into(mTarget);
             }
@@ -111,5 +121,35 @@ public class UserDetailActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         Picasso.with(this).cancelRequest(mTarget);
+    }
+
+    static class GradientTransformation implements Transformation {
+
+        @Override
+        public Bitmap transform(Bitmap source) {
+            int[] colours = new int[]{Color.TRANSPARENT, Color.BLACK};
+            float[] colourOpacity = new float[]{0.0f, 1.0f};
+
+            Bitmap bitmap = source.copy(Bitmap.Config.ARGB_8888, true);
+            Canvas canvas = new Canvas(bitmap);
+
+            /* Create gradient */
+            LinearGradient grad = new LinearGradient(0, 0, 0, canvas.getHeight(), colours, colourOpacity, Shader.TileMode.CLAMP);
+
+            /* Overlay gradient on bitmap */
+            Paint paint = new Paint();
+            paint.setStyle(Paint.Style.FILL);
+            paint.setAlpha(110);
+            paint.setShader(grad);
+            canvas.drawRect(0, 0, canvas.getWidth(), canvas.getHeight(), paint);
+            source.recycle();
+
+            return bitmap;
+        }
+
+        @Override
+        public String key() {
+            return "GradientTransformation";
+        }
     }
 }
