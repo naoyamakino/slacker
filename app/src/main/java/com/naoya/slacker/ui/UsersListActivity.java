@@ -13,6 +13,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
 import javax.inject.Inject;
 
@@ -26,6 +27,7 @@ import rx.functions.Func0;
 import rx.schedulers.Schedulers;
 
 public class UsersListActivity extends BaseActivity {
+    private static final String TAG = "UsersListActivity";
     @Bind(R.id.recyclerView)
     RecyclerView mRecyclerView;
 
@@ -62,6 +64,12 @@ public class UsersListActivity extends BaseActivity {
                         } else {
                             return mRemoteDataSource.getUsers();
                         }
+                    }
+                })
+                .doOnError(new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        Log.e(TAG, throwable.getMessage(), throwable);
                     }
                 })
                 .observeOn(AndroidSchedulers.mainThread())
