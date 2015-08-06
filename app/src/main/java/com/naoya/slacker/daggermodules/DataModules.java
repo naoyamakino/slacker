@@ -6,6 +6,7 @@ import com.google.gson.GsonBuilder;
 
 import com.naoya.slacker.SlackerApplication;
 import com.naoya.slacker.data.disk.DiskDataSource;
+import com.naoya.slacker.data.disk.ProfileImageCache;
 import com.naoya.slacker.data.disk.SlackerDatabaseOpenHelper;
 import com.naoya.slacker.data.memory.MemoryDataSource;
 import com.naoya.slacker.data.remote.RemoteDataSource;
@@ -103,6 +104,11 @@ public class DataModules {
     @Provides @Singleton
     DiskDataSource provideDiskDataSource(BriteDatabase db) {
         return new DiskDataSource(db);
+    }
+
+    @Provides @Singleton
+    ProfileImageCache provideProfileImageCache() {
+        return new ProfileImageCache();
     }
 
 }

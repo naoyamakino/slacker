@@ -63,5 +63,6 @@ public class User implements Serializable{
         profile.setRealName(Db.getString(cursor, ProfileData.ProfileColumns.REAL_NAME));
         profile.setEmail(Db.getString(cursor, ProfileData.ProfileColumns.EMAIL));
         profile.setPhone(Db.getString(cursor, ProfileData.ProfileColumns.PHONE));
+        profile.setImage_192(Db.getString(cursor, ProfileData.ProfileColumns.IMAGE_192));
     }
 }

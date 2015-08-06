@@ -46,6 +46,14 @@ public class Profile implements Serializable{
         this.phone = phone;
     }
 
+    public void setImage_192(String image_192) {
+        this.image_192 = image_192;
+    }
+
+    public String getImage_192() {
+        return image_192;
+    }
+
     public ContentValues getContentValues(String userId) {
         ContentValues contentValues = new ContentValues();
         contentValues.put(ProfileData.ProfileColumns.USER_ID, userId);
@@ -54,6 +62,7 @@ public class Profile implements Serializable{
         contentValues.put(ProfileData.ProfileColumns.SKYPE, skype);
         contentValues.put(ProfileData.ProfileColumns.PHONE, phone);
         contentValues.put(ProfileData.ProfileColumns.IMAGE_24, image_24);
+        contentValues.put(ProfileData.ProfileColumns.IMAGE_192, image_192);
         return contentValues;
     }
 }
