@@ -52,6 +52,9 @@ public class UserDetailActivity extends BaseActivity {
     @Bind(R.id.profileImage)
     ImageView mProfileImage;
 
+    @Bind(R.id.slackUserNameText)
+    TextView mSlackName;
+
     @Inject
     ProfileImageCache mImageCache;
 
@@ -92,6 +95,8 @@ public class UserDetailActivity extends BaseActivity {
         if (mUser.getColor() != null) {
             mProfileImage.setBackgroundColor(Color.parseColor("#" + mUser.getColor()));
         }
+
+        mSlackName.setText(mUser.getName());
 
         Profile profile = mUser.getProfile();
         if (profile != null) {

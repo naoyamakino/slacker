@@ -1,94 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="@color/light_grey"
-    >
-    <RelativeLayout
+<ScrollView
+    android:background="@color/light_grey"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="240dp"
-        android:id="@+id/headerContainer"
+        android:layout_height="match_parent"
         >
 
-        <ImageView
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/profileImage"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/profileTextView"
-            android:textSize="24sp"
-            android:textColor="@android:color/white"
-            android:layout_alignBottom="@id/profileImage"
-            android:layout_marginBottom="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginStart="16dp"
-            />
-    </RelativeLayout>
+            android:layout_height="240dp"
+            android:id="@+id/headerContainer"
+            >
 
-    <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        >
-        <RelativeLayout android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/profileImage"
+                />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/emailLabel"
-                android:layout_marginTop="16dp"
+                android:id="@+id/profileTextView"
+                android:textSize="24sp"
+                android:textColor="@android:color/white"
+                android:layout_alignBottom="@id/profileImage"
+                android:layout_marginBottom="16dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginStart="16dp"
-                android:text="@string/email"
-                android:textSize="12sp"
-                android:textColor="@android:color/darker_gray"
                 />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/emailTextView"
-                android:layout_toEndOf="@id/emailLabel"
-                android:layout_toRightOf="@+id/emailLabel"
-                android:layout_alignTop="@+id/emailLabel"
-                android:layout_marginLeft="8dp"
-                android:layout_marginStart="8dp"
-                android:textSize="12sp"
-                android:textColor="@android:color/darker_gray"
-                android:layout_marginBottom="16dp"
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/phoneLabel"
-                android:layout_below="@+id/emailLabel"
-                android:layout_marginTop="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginStart="16dp"
-                android:text="@string/phone"
-                android:textSize="12sp"
-                android:textColor="@android:color/darker_gray"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/phoneTextView"
-                android:layout_below="@+id/emailTextView"
-                android:layout_toEndOf="@id/phoneLabel"
-                android:layout_toRightOf="@+id/phoneLabel"
-                android:layout_alignTop="@+id/phoneLabel"
-                android:layout_marginLeft="8dp"
-                android:layout_marginStart="8dp"
-                android:textSize="12sp"
-                android:textColor="@android:color/darker_gray"
-                android:layout_marginBottom="16dp"
-                />
-
         </RelativeLayout>
-    </android.support.v7.widget.CardView>
 
-</LinearLayout>
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            >
+            <RelativeLayout android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/emailLabel"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginStart="16dp"
+                    android:text="@string/email"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/darker_gray"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/emailTextView"
+                    android:layout_toEndOf="@id/emailLabel"
+                    android:layout_toRightOf="@+id/emailLabel"
+                    android:layout_alignTop="@+id/emailLabel"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginStart="8dp"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/darker_gray"
+                    android:layout_marginBottom="16dp"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/phoneLabel"
+                    android:layout_below="@+id/emailLabel"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginStart="16dp"
+                    android:text="@string/phone"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/darker_gray"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/phoneTextView"
+                    android:layout_below="@+id/emailTextView"
+                    android:layout_toEndOf="@id/phoneLabel"
+                    android:layout_toRightOf="@+id/phoneLabel"
+                    android:layout_alignTop="@+id/phoneLabel"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginStart="8dp"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/darker_gray"
+                    android:layout_marginBottom="16dp"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/slackLabel"
+                    android:layout_below="@+id/phoneLabel"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginStart="16dp"
+                    android:text="@string/slack"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/darker_gray"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/slackUserNameText"
+                    android:layout_below="@+id/phoneTextView"
+                    android:layout_toEndOf="@id/slackLabel"
+                    android:layout_toRightOf="@+id/slackLabel"
+                    android:layout_alignTop="@+id/slackLabel"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginStart="8dp"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/darker_gray"
+                    android:layout_marginBottom="16dp"
+                    />
+
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
+</ScrollView>
